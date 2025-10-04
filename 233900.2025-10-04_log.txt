@@ -1,0 +1,61 @@
+2025-10-04 23:39:00,700 - INFO - Logging initialized. Output file: d:\Temp\AutoGen\233900.2025-10-04_log.txt
+2025-10-04 23:39:10,738 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:39:10,738 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:39:10,738 - INFO - State after treatments: T:0/15|Pts:P1:S4,P2:S4,P3:S6,P4:S6,P5:S5|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+2025-10-04 23:39:49,043 - INFO - Outcome for {'treat': 'P3', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:39:49,044 - INFO - Outcome for {'treat': 'P4', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:39:49,044 - INFO - State after treatments: T:1/15|Pts:P1:S4,P2:S4,P3:S4,P4:S4,P5:S5|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+2025-10-04 23:39:49,070 - INFO - Event: New patient 6 arrived with severity 7
+2025-10-04 23:40:29,251 - INFO - Outcome for {'treat': 'P6', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:40:29,252 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:40:29,252 - INFO - State after treatments: T:2/15|Pts:P1:S4,P2:S4,P3:S4,P4:S4,P5:S3,P6:S5|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5,6
+2025-10-04 23:40:29,252 - INFO - Event: New patient 9 arrived with severity 5
+2025-10-04 23:41:07,426 - INFO - Outcome for {'treat': 'P6', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:41:07,427 - INFO - Outcome for {'treat': 'P9', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:41:07,427 - INFO - State after treatments: T:3/15|Pts:P1:S4,P2:S4,P3:S4,P4:S4,P5:S3,P6:S3,P9:S3|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5,6,9
+2025-10-04 23:41:07,427 - INFO - Event: New patient 10 arrived with severity 6
+2025-10-04 23:41:48,757 - INFO - Outcome for {'treat': 'P10', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:41:48,758 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 23:41:48,758 - INFO - State after treatments: T:4/15|Pts:P2:S4,P3:S4,P4:S4,P5:S3,P6:S3,P9:S3,P10:S4|Sup:Meds:inf,Beds:inf|Q:2,3,4,5,6,9,10
+2025-10-04 23:41:48,758 - INFO - Event: New patient 7 arrived with severity 8
+2025-10-04 23:42:27,615 - INFO - Outcome for {'treat': 'P7', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:42:27,616 - INFO - Outcome for {'treat': 'P2', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 23:42:27,616 - INFO - State after treatments: T:5/15|Pts:P3:S4,P4:S4,P5:S3,P6:S3,P9:S3,P10:S4,P7:S6|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7
+2025-10-04 23:42:27,616 - INFO - Event: New patient 11 arrived with severity 9
+2025-10-04 23:43:18,804 - INFO - Outcome for {'treat': 'P11', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:43:18,805 - INFO - State after treatments: T:6/15|Pts:P3:S4,P4:S4,P5:S3,P6:S3,P9:S3,P10:S4,P7:S6,P11:S7|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11
+2025-10-04 23:43:18,805 - INFO - Event: New patient 12 arrived with severity 3
+2025-10-04 23:44:00,352 - INFO - Outcome for {'treat': 'P11', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:44:00,352 - INFO - Outcome for {'treat': 'P7', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:44:00,353 - INFO - State after treatments: T:7/15|Pts:P3:S5,P4:S5,P5:S3,P6:S3,P9:S3,P10:S4,P7:S4,P11:S5,P12:S3|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12
+2025-10-04 23:44:00,353 - INFO - Event: New patient 8 arrived with severity 4
+2025-10-04 23:44:40,270 - INFO - Outcome for {'treat': 'P3', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:44:40,271 - INFO - Outcome for {'treat': 'P4', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:44:40,271 - INFO - State after treatments: T:8/15|Pts:P3:S4,P4:S4,P5:S4,P6:S3,P9:S3,P10:S4,P7:S4,P11:S5,P12:S3,P8:S4|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8
+2025-10-04 23:44:40,271 - INFO - Event: New patient 13 arrived with severity 7
+2025-10-04 23:44:40,272 - INFO - Event: New patient 14 arrived with severity 2
+2025-10-04 23:45:27,658 - INFO - Outcome for {'treat': 'P13', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:45:27,658 - INFO - State after treatments: T:9/15|Pts:P3:S4,P4:S4,P5:S5,P6:S4,P9:S4,P10:S4,P7:S4,P11:S5,P12:S3,P8:S4,P13:S5,P14:S2|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14
+2025-10-04 23:45:27,659 - INFO - Event: New patient 15 arrived with severity 8
+2025-10-04 23:45:27,659 - INFO - Event: New patient 16 arrived with severity 6
+2025-10-04 23:46:09,234 - INFO - Outcome for {'treat': 'P15', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:46:09,234 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:46:09,235 - INFO - State after treatments: T:10/15|Pts:P3:S4,P4:S4,P5:S4,P6:S5,P9:S5,P10:S5,P7:S4,P11:S5,P12:S3,P8:S4,P13:S5,P14:S2,P15:S6,P16:S6|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14,15,16
+2025-10-04 23:46:09,235 - INFO - Event: New patient 17 arrived with severity 5
+2025-10-04 23:46:50,113 - INFO - Outcome for {'treat': 'P6', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:46:50,113 - INFO - Outcome for {'treat': 'P9', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:46:50,114 - INFO - State after treatments: T:11/15|Pts:P3:S4,P4:S4,P5:S4,P6:S4,P9:S4,P10:S6,P7:S4,P11:S5,P12:S3,P8:S4,P13:S5,P14:S2,P15:S6,P16:S6,P17:S5|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14,15,16,17
+2025-10-04 23:46:50,114 - INFO - Event: New patient 18 arrived with severity 9
+2025-10-04 23:46:50,114 - INFO - Event: New patient 19 arrived with severity 4
+2025-10-04 23:47:30,266 - INFO - Outcome for {'treat': 'P18', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:47:30,266 - INFO - Outcome for {'treat': 'P10', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:47:30,266 - INFO - State after treatments: T:12/15|Pts:P3:S4,P4:S4,P5:S4,P6:S4,P9:S4,P10:S5,P7:S4,P11:S5,P12:S3,P8:S4,P13:S5,P14:S2,P15:S6,P16:S6,P17:S5,P18:S7,P19:S4|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14,15,16,17,18,19
+2025-10-04 23:47:30,266 - INFO - Event: New patient 20 arrived with severity 7
+2025-10-04 23:48:16,176 - INFO - Outcome for {'treat': 'P18', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:48:16,177 - INFO - Outcome for {'treat': 'P20', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:48:16,177 - INFO - State after treatments: T:13/15|Pts:P3:S4,P4:S4,P5:S4,P6:S4,P9:S4,P10:S5,P7:S5,P11:S6,P12:S4,P8:S4,P13:S5,P14:S2,P15:S6,P16:S6,P17:S5,P18:S5,P19:S4,P20:S5|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14,15,16,17,18,19,20
+2025-10-04 23:49:06,175 - INFO - Outcome for {'treat': 'P11', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:49:06,175 - INFO - Outcome for {'treat': 'P7', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 23:49:06,176 - INFO - State after treatments: T:14/15|Pts:P3:S5,P4:S5,P5:S4,P6:S4,P9:S4,P10:S5,P7:S4,P11:S5,P12:S5,P8:S5,P13:S5,P14:S2,P15:S6,P16:S6,P17:S5,P18:S5,P19:S4,P20:S5|Sup:Meds:inf,Beds:inf|Q:3,4,5,6,9,10,7,11,12,8,13,14,15,16,17,18,19,20
+2025-10-04 23:49:36,177 - INFO - Simulation ended. Final Score: Score: 30 | History: ['Treated [0, Nurse_1, 5, 7, 5]', 'Treated [0, Nurse_2, 1, 6, 4]', 'Treated [1, Nurse_1, 3, 6, 4]', 'Treated [1, Nurse_2, 4, 6, 4]', 'Treated [2, Nurse_1, 6, 7, 5]', 'Treated [2, Nurse_2, 5, 5, 3]', 'Treated [3, Nurse_1, 6, 5, 3]', 'Treated [3, Nurse_2, 9, 5, 3]', 'Treated [4, Nurse_1, 10, 6, 4]', 'Discharged - [4, 1, 2]', 'Treated [5, Nurse_1, 7, 8, 6]', 'Discharged - [5, 2, 2]', 'Treated [6, Nurse_1, 11, 9, 7]', 'Worsened - [7, 3, 4, 5]', 'Worsened - [7, 4, 4, 5]', 'Treated [7, Nurse_1, 11, 7, 5]', 'Treated [7, Nurse_2, 7, 6, 4]', 'Worsened - [8, 3, 5, 6]', 'Worsened - [8, 4, 5, 6]', 'Worsened - [8, 5, 3, 4]', 'Treated [8, Nurse_1, 3, 6, 4]', 'Treated [8, Nurse_2, 4, 6, 4]', 'Worsened - [9, 5, 4, 5]', 'Worsened - [9, 6, 3, 4]', 'Worsened - [9, 9, 3, 4]', 'Treated [9, Nurse_1, 13, 7, 5]', 'Worsened - [10, 5, 5, 6]', 'Worsened - [10, 6, 4, 5]', 'Worsened - [10, 9, 4, 5]', 'Worsened - [10, 10, 4, 5]', 'Treated [10, Nurse_1, 15, 8, 6]', 'Treated [10, Nurse_2, 5, 6, 4]', 'Worsened - [11, 6, 5, 6]', 'Worsened - [11, 9, 5, 6]', 'Worsened - [11, 10, 5, 6]', 'Treated [11, Nurse_1, 6, 6, 4]', 'Treated [11, Nurse_2, 9, 6, 4]', 'Worsened - [12, 10, 6, 7]', 'Treated [12, Nurse_1, 18, 9, 7]', 'Treated [12, Nurse_2, 10, 7, 5]', 'Worsened - [13, 7, 4, 5]', 'Worsened - [13, 11, 5, 6]', 'Worsened - [13, 12, 3, 4]', 'Treated [13, Nurse_1, 18, 7, 5]', 'Treated [13, Nurse_2, 20, 7, 5]', 'Worsened - [14, 3, 4, 5]', 'Worsened - [14, 4, 4, 5]', 'Worsened - [14, 7, 5, 6]', 'Worsened - [14, 11, 6, 7]', 'Worsened - [14, 12, 4, 5]', 'Worsened - [14, 8, 4, 5]', 'Treated [14, Nurse_1, 11, 7, 5]', 'Treated [14, Nurse_2, 7, 6, 4]', 'Worsened - [15, 3, 5, 6]', 'Worsened - [15, 4, 5, 6]', 'Worsened - [15, 12, 5, 6]', 'Worsened - [15, 8, 5, 6]', 'Worsened - [15, 13, 5, 6]', 'Worsened - [15, 14, 2, 3]']
+2025-10-04 23:49:36,178 - INFO - Detailed log saved to d:\Temp\AutoGen\233900.2025-10-04_log.txt

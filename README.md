@@ -4,6 +4,7 @@
 Using the clues you have provided me with ChatDev and the discussion we had, I found a framework called ["AutoGen" by Microsoft](https://github.com/microsoft/autogen) which can support both Local LLM and Commercial AI via API Token. A bit of searching for an LLM with free API Token led me to Google AI Studio, which provide me with 2500 API calls a day (or a month? I have to check this again), **gemini-2.5-flash** from them should be more than sufficient for this simple program.
 
 For the initial design of this, we have: 
+- 2 Modes for the program to run in, either via entered text (hardcoded to read in a certain format at this moment) or randomised (seeded for consistency) 
 - Nurse agents manage patients with varying and worsening severities (1-10 scale, with 10 being worst, and severity increases every few days untreated), responding to events.
 - Randomised events like new arrivals or emergencies under resource constraints (resource is infinite for current test run). 
 - The simulation operates on a timeline (e.g., 15 ticks), with performance scored at the end as: +1 for condition improvements, +2 for discharges, -1 for worsenings, and -3 for deaths. This proof-of-concept (PoC) focuses on Goal A (independent local simulations) to check feasibility.
@@ -17,9 +18,10 @@ For the initial design of this, we have:
 ## Goals and Current Work
 - **Goal A: Independent Simulations**: Each computer runs the full scenario locally, with nurse agents collaborating via in-memory GroupChat. Grades are computed independently. This PoC implements Goal A on a single machine, testing agent coordination and system mechanics. **Pros**: Simple to implement, low-latency, ideal for parallel experiments and strategy benchmarking. **Cons**: Lacks inter-machine collaboration, limiting realism for distributed team dynamics.
 - **Goal B: Distributed Agents**: Each computer hosts one or more agents, communicating across a network (e.g., via sockets or REST APIs) to coordinate actions like patient assignments. Score are measured by personal and total outcomes. **Pros**: Models real-world team dynamics and network delays, enabling study of emergent behaviors. **Cons**: Complex networking, potential synchronization issues, and higher latency. Goal B is planned but not yet implemented.
-- **Current Work**: The PoC tests Goal A with 3 nurses, a 15-tick timeline, and infinite supplies. The recent run (log 194030.2025-10-04_log.txt) started with 5 patients (severities 5-8), achieving a score of 23 (13 treatments, 8 discharges, 2 worsenings, no deaths). The simulation ended early at Tick 9 with all patients discharged. Agents coordinated effectively, avoiding overlaps, with one initial 503 error resolved via rate limit handling.
+- **Current Work**: The PoC tests Goal A with 3 nurses, a 15-tick timeline, and infinite supplies. The recent runs all performed very well with positive score and ended with 0 deceased patient even when stresstested with 2 nurses on 20 patients and no one had their condition worse than Severity 6.
 
 ## Future Work
+- Add the feature so user can enter scenario in free form and an LLM model will be used to read it and put it into proper format.
 - Implement more sudden events (mass casualty emergency, infectious disease patient.)
 - Implement Goal B using sockets for cross-machine agent communication.
 - Enhance patient dynamics with Markov chains for realistic condition evolution.
