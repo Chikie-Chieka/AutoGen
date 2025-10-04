@@ -1,0 +1,34 @@
+2025-10-04 19:40:30,921 - INFO - Logging initialized. Output file: d:\Temp\AutoGen\194030.2025-10-04_log.txt
+2025-10-04 19:40:39,746 - ERROR - Unexpected error during chat initiation: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}
+2025-10-04 19:41:46,938 - INFO - Outcome for {'treat': 'P3', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:41:46,939 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:41:46,939 - INFO - State after treatments: T:0/15|Pts:P1:S5,P2:S4,P3:S6,P4:S6,P5:S6|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+2025-10-04 19:42:25,535 - INFO - Outcome for {'treat': 'P3', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:42:25,536 - INFO - Outcome for {'treat': 'P4', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:42:25,537 - INFO - State after treatments: T:1/15|Pts:P1:S5,P2:S4,P3:S4,P4:S4,P5:S6|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+2025-10-04 19:43:05,230 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:43:05,230 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:43:05,230 - INFO - State after treatments: T:2/15|Pts:P1:S3,P2:S4,P3:S4,P4:S4,P5:S4|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+2025-10-04 19:43:43,227 - INFO - Outcome for {'treat': 'P2', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:43:43,227 - INFO - Outcome for {'treat': 'P3', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:43:43,227 - INFO - State after treatments: T:3/15|Pts:P1:S3,P4:S4,P5:S4|Sup:Meds:inf,Beds:inf|Q:1,4,5
+2025-10-04 19:43:43,227 - INFO - Event: Emergency for patient 1, severity now 5
+2025-10-04 19:44:21,957 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:44:21,958 - INFO - Outcome for {'treat': 'P4', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:44:21,958 - INFO - State after treatments: T:4/15|Pts:P1:S3,P5:S4|Sup:Meds:inf,Beds:inf|Q:1,5
+2025-10-04 19:44:21,958 - INFO - Event: New patient 6 arrived with severity 3
+2025-10-04 19:45:02,972 - INFO - Outcome for {'treat': 'P5', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:45:02,972 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:45:02,972 - INFO - State after treatments: T:5/15|Pts:P6:S3|Sup:Meds:inf,Beds:inf|Q:6
+2025-10-04 19:45:42,423 - INFO - Outcome for {'treat': 'P6', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:45:42,423 - INFO - State after treatments: T:6/15|Pts:|Sup:Meds:inf,Beds:inf|Q:
+2025-10-04 19:45:42,423 - INFO - Event: New patient 1 arrived with severity 5
+2025-10-04 19:46:22,418 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:46:22,418 - INFO - State after treatments: T:7/15|Pts:P1:S3|Sup:Meds:inf,Beds:inf|Q:1
+2025-10-04 19:46:22,419 - INFO - Event: Emergency for patient 1, severity now 5
+2025-10-04 19:47:04,244 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: improvement
+2025-10-04 19:47:04,244 - INFO - State after treatments: T:8/15|Pts:P1:S3|Sup:Meds:inf,Beds:inf|Q:1
+2025-10-04 19:47:47,702 - INFO - Outcome for {'treat': 'P1', 'with': 'meds', 'effect': -2}: discharge
+2025-10-04 19:47:47,702 - INFO - State after treatments: T:9/15|Pts:|Sup:Meds:inf,Beds:inf|Q:
+2025-10-04 19:48:17,704 - INFO - Simulation ended. Final Score: Score: 23 | History: ['Treated [0, Nurse_1, 3, 8, 6]', 'Treated [0, Nurse_2, 5, 8, 6]', 'Treated [1, Nurse_1, 3, 6, 4]', 'Treated [1, Nurse_2, 4, 6, 4]', 'Treated [2, Nurse_1, 5, 6, 4]', 'Treated [2, Nurse_2, 1, 5, 3]', 'Discharged - [3, 2, 2]', 'Discharged - [3, 3, 2]', 'Worsened - [4, 1, 3, 5]', 'Treated [4, Nurse_1, 1, 5, 3]', 'Discharged - [4, 4, 2]', 'Discharged - [5, 5, 2]', 'Discharged - [5, 1, 1]', 'Discharged - [6, 6, 1]', 'Treated [7, Nurse_1, 1, 5, 3]', 'Worsened - [8, 1, 3, 5]', 'Treated [8, Nurse_1, 1, 5, 3]', 'Discharged - [9, 1, 1]']
+2025-10-04 19:48:17,704 - INFO - Detailed log saved to d:\Temp\AutoGen\194030.2025-10-04_log.txt
