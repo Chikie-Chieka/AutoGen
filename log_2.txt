@@ -1,0 +1,50 @@
+python -u "d:\Temp\AutoGen\PoCGoalARateLimitedWithMorgue.py"
+2025-10-04 13:54:18,370 - INFO - Logging initialized. Output file: d:\Temp\AutoGen\135418.2025-10-04_log.txt
+Admin (to chat_manager):
+
+State:T:0/30|Pts:P1:S5,P2:S4,P3:S5,P4:S5,P5:S7|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+Discuss actions.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Nurse_1
+
+Admin (to chat_manager):
+
+State:T:0/30|Pts:P1:S5,P2:S4,P3:S5,P4:S5,P5:S7|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+Discuss actions.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Nurse_1
+
+Admin (to chat_manager):
+
+State:T:0/30|Pts:P1:S5,P2:S4,P3:S5,P4:S5,P5:S7|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+Discuss actions.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Nurse_1
+
+Nurse_1 (to chat_manager):
+
+Patient P5 is the highest priority with a severity of 7. The other patients are stable at S4 and S5. My immediate action must be to stabilize the most critical patient. I will administer medication to P5 to reduce their severity.
+
+{"treat": "P5", "with": "meds", "effect": -2}
+
+--------------------------------------------------------------------------------
+Admin (to chat_manager):
+
+State:T:0/30|Pts:P1:S5,P2:S4,P3:S5,P4:S5,P5:S7|Sup:Meds:inf,Beds:inf|Q:1,2,3,4,5
+Discuss actions.
+
+--------------------------------------------------------------------------------
+
+Next speaker: Nurse_1
+
+Nurse_1 (to chat_manager):
+
+Patient P5 is the highest priority with a severity of 7. The other patients are stable at S4 and S5. My immediate action must be to stabilize the most critical patient. I will administer medication to P5 to reduce their severity.
+
+{"treat": "P5", "with": "meds", "effect": -2}
