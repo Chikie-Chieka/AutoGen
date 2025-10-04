@@ -36,9 +36,8 @@ class Patient:
 
     def mark_deceased(self, time_of_death: int):
         self.deceased = True
-        self.severity = -1  # Indicate deceased
         self.time_of_death = time_of_death
-    
+
     def __str__(self):
         if self.deceased:
             return f"P{self.id}:Deceased"
@@ -46,12 +45,12 @@ class Patient:
 
 class Scenario:
     """Manages the simulation environment."""
-    def __init__(self, timeline_duration: int = 60, initial_patients: int = 3, supply_mode: str = "normal", logger: logging.Logger | None = None):
+    def __init__(self, timeline_duration: int = 60, initial_patients: int = 5, supply_mode: str = "normal", logger: logging.Logger | None = None):
         self.timeline = 0
         self.max_timeline = timeline_duration  # In simulated minutes
         self.patients = self._generate_initial_patients(initial_patients)
         self.supplies = {"meds": 100, "beds": 10} if supply_mode == "low" else {"meds": float('inf'), "beds": float('inf')}
-        self.events = []  # List of pending events
+        self.last_events: List[Dict] = []  # List of events from last tick
         self.patient_queue = list(self.patients.keys())  # IDs in queue
         self.morgue: Dict[int, Patient] = {}
         self.logger = logger or logging.getLogger(__name__)
@@ -60,38 +59,55 @@ class Scenario:
     def _generate_initial_patients(self, num: int) -> Dict[int, Patient]:
         patients = {}
         for i in range(1, num + 1):
-            severity = random.randint(1, 8)  # Moderate to severe
+            severity = random.randint(4, 8)  # Moderate to severe
             patients[i] = Patient(i, severity, 0)
         return patients
 
     def tick(self):
         """Advance timeline by 1 minute, apply untreated penalties, generate events."""
         self.timeline += 1
+        self.last_events = []
         for pid, patient in list(self.patients.items()):
             if patient.deceased:
                 continue
             if self.timeline - patient.last_treated > 5:  # Worsen every 5 min untreated
+                initial_sev = patient.severity
                 patient.update_condition()
-            if self._maybe_decease(pid, patient):
-                continue
+                post_sev = patient.severity
+                if post_sev > initial_sev:
+                    self.last_events.append({
+                        "outcome": "worsening",
+                        "patient_id": pid,
+                        "initial_sev": initial_sev,
+                        "post_sev": post_sev
+                    })
+            self._maybe_decease(pid, patient)
         self._generate_events()
 
     def _generate_events(self):
         """Generate random events: new patient (30% chance) or emergency (20% chance)."""
-        if random.random() < 0.2:  # New patient
+        if random.random() < 0.3:  # New patient
             new_id = max(self.patients.keys()) + 1 if self.patients else 1
             new_severity = random.randint(1, 10)
             self.patients[new_id] = Patient(new_id, new_severity, self.timeline)
             self.patient_queue.append(new_id)
             self.logger.info(f"Event: New patient {new_id} arrived with severity {new_severity}")
-        if random.random() < 0.1:  # Emergency
+        if random.random() < 0.2:  # Emergency
             if self.patients:
                 pid = random.choice(list(self.patients.keys()))
                 patient = self.patients[pid]
                 if not patient.deceased:
+                    initial_sev = patient.severity
                     patient.update_condition(untreated_penalty=2)  # Worsen faster
-                    if self._maybe_decease(pid, patient):
-                        return
+                    post_sev = patient.severity
+                    if post_sev > initial_sev:
+                        self.last_events.append({
+                            "outcome": "worsening",
+                            "patient_id": pid,
+                            "initial_sev": initial_sev,
+                            "post_sev": post_sev
+                        })
+                    self._maybe_decease(pid, patient)
                     self.logger.info(f"Event: Emergency for patient {pid}, severity now {patient.severity}")
 
     def get_state(self) -> str:
@@ -105,7 +121,7 @@ class Scenario:
             base = f"{base}|Morgue:{morgue_str}"
         return base
 
-    def apply_action(self, action: Dict):
+    def apply_action(self, action: Dict) -> Dict | None:
         """Apply agent's action: e.g., {'treat': pid, 'with': 'meds', 'effect': -2}"""
         if 'treat' in action:
             pid = self._normalize_patient_id(action['treat'])
@@ -113,17 +129,29 @@ class Scenario:
                 patient = self.patients[pid]
                 if action.get('with') == 'meds' and self.supplies['meds'] > 0:
                     self.supplies['meds'] -= 1
-                    effect = action.get('effect', -3)  # Improve by 3
+                    effect = action.get('effect', -2)
+                    initial_sev = patient.severity
                     new_sev = patient.update_condition(effect)
                     patient.last_treated = self.timeline
                     patient.treatment_history.append(action)
                     if new_sev < 3:  # Discharge threshold
                         self._discharge_patient(pid)
-                        return "discharge"
-                    elif self._maybe_decease(pid, patient):
-                        return "death"
-                    return "improvement" if effect < 0 else "worsening"
+                        return {"outcome": "discharge", "patient_id": pid, "last_sev": new_sev}
+                    if self._maybe_decease(pid, patient):
+                        return {"outcome": "death", "patient_id": pid}
+                    outcome = "improvement" if effect < 0 else "worsening"
+                    return {
+                        "outcome": outcome,
+                        "patient_id": pid,
+                        "initial_sev": initial_sev,
+                        "post_sev": new_sev
+                    }
         return None
+
+    def get_last_events(self) -> List[Dict]:
+        events = self.last_events
+        self.last_events = []
+        return events
 
     def is_ended(self) -> bool:
         return self.timeline >= self.max_timeline or not self.patients
@@ -151,6 +179,7 @@ class Scenario:
             del self.patients[pid]
         self.patient_queue = [p for p in self.patient_queue if p != pid]
         self.logger.warning(f"Patient {pid} has died and moved to the morgue.")
+        self.last_events.append({"outcome": "death", "patient_id": pid})
 
     def _maybe_decease(self, pid: int, patient: Patient) -> bool:
         if patient.deceased:
@@ -166,16 +195,29 @@ class Scorer:
         self.points = 0
         self.history = []
 
-    def update(self, outcome: str):
+    def update(self, event_dict: Dict, tick: int, nurse: str | None = None):
+        outcome = event_dict["outcome"]
+        pid = event_dict["patient_id"]
+        init_sev = event_dict.get("initial_sev")
+        post_sev = event_dict.get("post_sev")
+        last_sev = event_dict.get("last_sev")
+
         if outcome == "improvement":
+            log = f"Treated [{tick}, {nurse}, {pid}, {init_sev}, {post_sev}]"
             self.points += 1
-        elif outcome == "discharge":
-            self.points += 2
         elif outcome == "worsening":
-            self.points -= 1
+            log = f"Worsened - [{tick}, {pid}, {init_sev}, {post_sev}]"
+            self.points -= 1 if nurse else 0  # Deduct only for action-based worsening
+        elif outcome == "discharge":
+            log = f"Discharged - [{tick}, {pid}, {last_sev if last_sev else init_sev}]"
+            self.points += 2
         elif outcome == "death":
+            log = f"Deceased - [{tick}, {pid}]"
             self.points -= 3
-        self.history.append(outcome)
+        else:
+            return  # Invalid outcome
+
+        self.history.append(log)
 
     def get_score(self) -> int:
         return self.points
@@ -190,7 +232,7 @@ def setup_agents(num_nurses: int = 3) -> List[AssistantAgent]:
     # Load config for Gemini with caching
     config_list = [
         {
-            "model": "gemini-2.5-flash",
+            "model": "gemini-1.5-pro",
             "api_key": os.getenv("GOOGLE_API_KEY", "AIzaSyCv7CHW4E7atp6QW6WlySwLpV0l1HU1Ebc"),
             "api_type": "google"
         }
@@ -265,7 +307,7 @@ def run_simulation(num_nurses: int = 3, timeline_duration: int = 60, supply_mode
     )
 
     group_chat = GroupChat(agents=agents, messages=[], max_round=num_nurses, speaker_selection_method="round_robin")
-    manager = GroupChatManager(groupchat=group_chat, llm_config={"config_list": [{"model": "gemini-2.5-flash", "api_key": os.getenv("GOOGLE_API_KEY", "AIzaSyCv7CHW4E7atp6QW6WlySwLpV0l1HU1Ebc"), "api_type": "google"}], "cache_seed": 42})
+    manager = GroupChatManager(groupchat=group_chat, llm_config={"config_list": [{"model": "gemini-1.5-pro", "api_key": os.getenv("GOOGLE_API_KEY", "AIzaSyCv7CHW4E7atp6QW6WlySwLpV0l1HU1Ebc"), "api_type": "google"}], "cache_seed": 42})
 
     last_request_time: float | None = None
 
@@ -293,14 +335,17 @@ def run_simulation(num_nurses: int = 3, timeline_duration: int = 60, supply_mode
             if "content" in msg and isinstance(msg["content"], str):
                 action = extract_action(msg["content"])
                 if action:
-                    outcome = scenario.apply_action(action)
-                    if outcome:
-                        scorer.update(outcome)
-                        logger.info(f"Outcome for {action}: {outcome}")
+                    outcome_dict = scenario.apply_action(action)
+                    if outcome_dict:
+                        nurse = msg.get("name", "Unknown")
+                        scorer.update(outcome_dict, scenario.timeline, nurse)
+                        logger.info(f"Outcome for {action}: {outcome_dict['outcome']}")
 
         group_chat.messages = []  # Clear history to reduce tokens in next chat
 
         scenario.tick()
+        for event_dict in scenario.get_last_events():
+            scorer.update(event_dict, scenario.timeline)
         time.sleep(30)  # Increased throttle to 30s to avoid 429 errors (was 15s)
 
     logger.info(f"Simulation ended. Final Score: {scorer}")
