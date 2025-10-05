@@ -1,6 +1,9 @@
 import os
 from typing import List
 from autogen import AssistantAgent
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
 
 def setup_agents(num_nurses: int = 3) -> List[AssistantAgent]:
     """Create nurse agents with Gemini model."""
@@ -8,13 +11,27 @@ def setup_agents(num_nurses: int = 3) -> List[AssistantAgent]:
     config_list = [
         {
             "model": "gemini-2.5-flash",
-            "api_key": os.getenv("GOOGLE_API_KEY", "AIzaSyDSbQaFjrULmsKDVwE6w4qDS-rcrrZYoiA"),
+            "api_key": os.getenv("GOOGLE_API_KEY"),
             "api_type": "google",
             "generation_config": {
                 "response_mime_type": "application/json"
             }
         }
     ]
+    # config_list = [
+    #     {
+    #         "model": "deepseek/deepseek-chat-v3.1:free",
+    #         "api_key": os.getenv("OPENROUTER_API_KEY"),
+    #         "base_url": "https://openrouter.ai/api/v1",
+    #         # OpenAI-compatible params for JSON consistency
+    #         "temperature": 0.1,  # Low for deterministic outputs
+    #         "top_p": 0.95,
+    #         "extra_headers": {
+    #             "HTTP-Referer": "http://localhost:8000",  # Optional: Helps with OpenRouter analytics/leaderboard
+    #             "X-Title": "Hospital Triage Sim"  # Optional: Tags your app
+    #         }
+    #     }
+    # ]
     llm_config = {"config_list": config_list, "cache_seed": 42}  # Enable caching
 
     system_message = """You are a nurse, your task is to provide treatment for patient, each treatment will lessen the severity of a patient condition by 2, 

@@ -3,7 +3,7 @@ import os
 # --- Constants ---
 # The name of the file where tasks will be stored.
 TODO_FILE = "todo.txt"
-
+ 
 # --- File Operations ---
 
 def load_tasks() -> list[str]:
